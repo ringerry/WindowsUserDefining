@@ -1,0 +1,15 @@
+{
+  "name": "userdefining",
+  "version": "1.0.0",
+  "description": "Оперделения наличия имени пользователя Winodws в системе.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Меньшиков Артем",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

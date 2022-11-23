@@ -8,9 +8,7 @@ function UserValidation1(e)
         document.frm.firstName.focus();
         return false;
     }
-
     return true;
-
 }
 
 function ResetIndex()

@@ -1,5 +1,12 @@
-var express = require('express');
-var app = express.createServer();
+const dotenv = require('dotenv')
+dotenv.config()
+// var express = require('express');
+// var app = express.createServer();
+
+let express = require('express');
+let http = require('http');
+let app = express();
+let server = http.createServer(app);
 
 app.use(express.static(__dirname + '/static'));
 
@@ -8,8 +15,10 @@ app.get('/', function(req, res) {
     res.render('index.html', model);
 });
 
-var port = process.env.PORT || 80;
+let port = process.env.PORT || 80;
 
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
+
+// dfk

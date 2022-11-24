@@ -11,9 +11,7 @@
 #include <lm.h>
 #include <locale.h>
 #include <string>
-#include <vector>
 #include <algorithm>
-#include <fstream>
 
 std::string LPWSTRToString(LPWSTR str) 
 {
@@ -25,7 +23,7 @@ std::string LPWSTRToString(LPWSTR str)
 
 bool IsUserExist(std::string userName)
 {
-    setlocale(LC_ALL, "Rus");
+    setlocale(LC_ALL, "ru_RU.UTF-8");
     DWORD dwlevel = 0;
     DWORD dwfilter = 0;
     USER_INFO_0* theEntries = new USER_INFO_0[2000];
@@ -33,19 +31,6 @@ bool IsUserExist(std::string userName)
     DWORD dwentriesread;
     DWORD dwtotalentries;
     NET_API_STATUS result;
-
-    
-
-    std::ofstream out;          // поток для записи
-    
-    out.open(".\\Names.txt", std::ofstream::out | std::ofstream::trunc);
-    out.close();
-    
-    // out.open(".\\Names.txt",ios_base::out | ios_base::app); // окрываем файл для записи
-    // if (out.is_open())
-    // {
-    //     out << userName << std::endl;
-    // }
      
 
     result = NetUserEnum(NULL, dwlevel, dwfilter, (LPBYTE*)&theEntries, dwprefmaxlen, &dwentriesread, &dwtotalentries, NULL);
@@ -55,8 +40,6 @@ bool IsUserExist(std::string userName)
     {
         std::string curUserName = LPWSTRToString(theEntries[i].usri0_name);
         std::transform(curUserName.begin(), curUserName.end(), curUserName.begin(), ::toupper);
-
-        // out << curUserName << std::endl;
 
         if ( curUserName == userName) 
         {

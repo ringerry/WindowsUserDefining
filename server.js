@@ -3,8 +3,6 @@ dotenv.config();
 
 
 const check_windows_user = require('bindings')('check_windows_user');
-console.log(check_windows_user.IsUserNameExist("Practice"));
-
 
 
 let express = require('express');
@@ -23,8 +21,6 @@ app.use(bodyParser.json());
 //     var model = { title : { main: "hello world!", subtitle: "subtitle" }, layout: false };
 //     res.render('index.html', model);    
 // });
-
-const urlencodedParser = express.urlencoded({extended: false});
 
 app.post("/", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);

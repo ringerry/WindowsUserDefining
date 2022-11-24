@@ -1,13 +1,10 @@
 @media (max-width:800px) {
-    
     table{
         width: 98%;
     }
-    
 }
 
 @media (max-width:375px) {
-    
     .form_out_input{
         width:80%;
     }
@@ -15,7 +12,6 @@
    
 
 @media (max-width:500px) {
-    
     header{
         flex-direction: column;
     }
@@ -28,39 +24,17 @@
     footer{
         flex-direction: column;
     }
+
     .send_butt_over{
-        width:100%;
-/*        flex-direction: column;*/
-/*            justify-content: center;*/
-/*    align-content: center;*/
-/*    align-items: center;*/
-        
+        width:100%;        
     }
+
     .send_div{
         width:100%;
-/*        margin: auto;*/
     }
+    
     .send_but{
         margin: auto;
-    }
-    .build_butt{
-/*        line-height: 5px;*/
-    }
-    
+    }    
 }
    
-
-/*
-@media screen and (max-width: 480px) {
-   html {
-      -webkit-text-size-adjust: none;
-   }
-    .main_div {
-        width: 100%
-    }
-    
-        body {
-        font-size: 35px;
-    }
-}
-*/

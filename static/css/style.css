@@ -279,6 +279,7 @@ td,th{
     background-color:#ffffff;
     border-radius: 10px;
     transition: .2s;
+    margin: 20px;
     /* padding: 0px 20px 0px 20px; */
     /* position: relative; */
 }
@@ -313,6 +314,7 @@ td,th{
     position: relative;
     border-radius: 10px;
     transition: .2s;
+    margin: 20px;
 }
 .butt:hover {
     /*    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);*/

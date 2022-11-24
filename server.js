@@ -1,36 +1,32 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-
 const check_windows_user = require('bindings')('check_windows_user');
-
 
 let express = require('express');
 let bodyParser = require('body-parser')
 let jsonParser = bodyParser.json();
-let http = require('http');
-const req = require('express/lib/request');
 let app = express();
-let server = http.createServer(app);
 
 app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.json());
 
 
-// app.get('/', function(req, res) {
-//     var model = { title : { main: "hello world!", subtitle: "subtitle" }, layout: false };
-//     res.render('index.html', model);    
-// });
-
 app.post("/", jsonParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
+    
+    if(!request.body)
+    {
+        return response.sendStatus(400);
+    } 
+
     console.log('start body');
     console.log(request.body);
     console.log('end body');
 
-    let resp = {
+    let resp = 
+    {
         isUserExist: check_windows_user.IsUserNameExist(request.body.user_name),
-      };
+    };
 
     response.send(resp);
 });

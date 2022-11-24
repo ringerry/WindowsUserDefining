@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Проверка пользователя в системе</title>
+
     <link  rel="stylesheet" href="css/style.css">
     <link  rel="stylesheet" href="css/media-queries.css">
+
     <meta content="width=device-width" name="viewport" id="viewport">
-    <!--    <script src="script.js"></script>--> 
 
     <script src="functions.js"></script> 
 </head>
@@ -25,15 +26,12 @@
     </header> -->
     <main class="main_container" id="main_id">
         <!--Главная область-->
-        <!--        <div class="main_div">-->
         <div class="main_div">
             <form class="form_for_index" id="SendForm" action="/" method="post">
-                <!-- <form class="form_for_index" id="SendForm" action="formHandler.php" method="post"> -->
                 <div class="border_nice" id="border_nice_id">
                     <div class="form_title">
                         <h2>Проверка пользователя в системе</h2>
                     </div>
-                    <!--onkeyup="this.value = this.value.replace (/[^0-9,]/g, '')"-->
                     <div class="input_box" id="input_box_id">
                         <input type="text" onkeyup="format_name(event)" id="user_name_input" name="userName" class="form_input font_fill"  placeholder=" ">
                         <label class="form_label">Имя пользователя</label>
@@ -41,23 +39,15 @@
                     </div>
                 </div>
                 <div>
-                    <!--                        <input type="button" value="Отправть заявку">-->
                     <div class="send_butt_over">
 
                         <div class="send_div" id="action_butt_id">
-                            <!--<p class="send_butt"> Отправить заявку </p>-->
                             <button type="submit" class="send_butt" id="action_butt_text_id">Проверить</button>
                         </div>
-
-                        <!-- <div class="send_div" id="action_butt_id">
-                            <p class="butt" id="action_butt_text_id" onclick="CheckUser()"> Проверить </p>
-                        </div> -->
-
                     </div>
                 </div>
             </form>
         </div>
-        <!--        </div>-->
     </main>
     <!-- <footer>
         <div class="footer_text ">
@@ -74,6 +64,7 @@
     </footer> -->
 
 <script src="script.js"></script> 
+
 </body>
 
 </html>

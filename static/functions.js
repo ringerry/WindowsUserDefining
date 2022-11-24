@@ -1,21 +1,8 @@
 let IsUserExistGlobal;
-function UserValidation1(e)
-{
-    var nameRegex = /^[a-zA-Zа-яА-Я0-9 ]+$/;
-    target.value = target.value.replace(/^[^a-zA-Zа-яА-Я0-9 ]+$/g, '');
-    var validUsername = e.target.value.match(nameRegex);
-    if(validUsername == null){
-        alert("Имя пользователя введено неверно.");
-        document.frm.firstName.focus();
-        return false;
-    }
-    return true;
-}
 
 function ResetIndex()
 {
     window.location.reload();
-
 }
 
 function DeleteInfoDiv()
@@ -24,18 +11,15 @@ function DeleteInfoDiv()
     item.parentNode.removeChild(item);
 }
 
-function BackButtonToCheckButton()
+function sleep(milliseconds) 
 {
-
-}
-
-function sleep(milliseconds) {
     const date = Date.now();
     let currentDate = null;
+
     do {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
-  }
+}
 
 function CreateInputDiv()
 {
@@ -64,140 +48,6 @@ function InfoDivToInputDiv()
 {
     DeleteInfoDiv();
     CreateInputDiv();
-}
-
-const fetchedData = async () =>{
-    try {
-        let body = {
-            user_name: userName,
-          };
-    
-        let json_body = JSON.stringify(body);
-           
-        let response = await fetch('/', {
-    
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-              },
-            body: json_body
-    
-        }).then(function (response) {
-    
-            
-            console.log(response);
-            return response;
-    
-        // }).then(function (text) {
-    
-        //     //let resp = JSON.parse(text);
-        //     console.log(text);
-        //     let resp = JSON.parse(text);  
-        //     alert("Готово")  
-        //     return resp.isUserExist;
-        //     //return resp.isUserExist;
-    
-        }).catch(function (err) {
-            console.error(err);
-        });
-
-        if (response.ok)
-        {
-            console.log(response.text());
-            let resp = JSON.parse(response.text());  
-            alert("Готово")  
-            return resp.isUserExist;
-        }
-    }
-    catch(err) {console.log(err)}
-}
-
-
-
-function IsUserExist(userName)
-{
-
-    // try {
-    //     let body = {
-    //         user_name: userName,
-    //       };
-    
-    //     let json_body = JSON.stringify(body);
-           
-    //     let response = await fetch('/', {
-    
-    //         method: 'post',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //           },
-    //         body: json_body
-    
-    //     }).then(function (response) {
-    
-            
-    //         console.log(response);
-    //         return response;
-    
-    //     // }).then(function (text) {
-    
-    //     //     //let resp = JSON.parse(text);
-    //     //     console.log(text);
-    //     //     let resp = JSON.parse(text);  
-    //     //     alert("Готово")  
-    //     //     return resp.isUserExist;
-    //     //     //return resp.isUserExist;
-    
-    //     }).catch(function (err) {
-    //         console.error(err);
-    //     });
-
-    //     if (response.ok)
-    //     {
-    //         console.log(response.text());
-    //         let resp = JSON.parse(response.text());  
-    //         alert("Готово")  
-    //         return resp.isUserExist;
-    //     }
-    // }
-    // catch(err) {console.log(err)}
-
-    let body = {
-        user_name: userName,
-      };
-
-    let json_body = JSON.stringify(body);
-
-    let result;
-    
-    fetch('/', {
-
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-        body: json_body
-
-    }).then(function (response) {
-
-        
-        console.log(response);
-        return response.text();
-
-    }).then(function (text) {
-
-        //let resp = JSON.parse(text);
-        console.log(text);
-        let resp = JSON.parse(text);  
-        alert("Готово")  
-        IsUserExistGlobal = resp.isUserExist;
-        //return resp.isUserExist;
-
-    }).catch(function (err) {
-        console.error(err);
-    });
-
-    //return result;
-
 }
 
 function DeleteInputNode()
@@ -262,19 +112,4 @@ function ShowResult(userName,isUserExist)
     DeleteInputNode();
     CreateInfoDiv(userName,isUserExist);
     CheckButtonToBackButton();
-}
-
-
-async function CheckUser()
-{
-    let userName = document.getElementById("user_name_input");
-    if (userName == null || userName.value == "")
-    {
-        alert("Пустое имя пользователя.");
-        exit;
-    }
-
-    let res = await IsUserExist(userName.value);
-    sleep(3000);
-    ShowResult(userName.value,res);
 }

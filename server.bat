@@ -1,1 +1,2 @@
-node server.js
+start /b npm start
+start http://localhost:3333

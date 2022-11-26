@@ -1,0 +1,15 @@
+{
+  "name": "spinner",
+  "version": "1.0.0",
+  "description": "Предзагрузчик",
+  "main": "spinner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && node spinner.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "Меньшиков Артем",
+  "license": "MIT"
+}

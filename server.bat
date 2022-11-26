@@ -1,3 +1,3 @@
 start /b npm start
 
-start http://localhost:3333
+start http://localhost:3332

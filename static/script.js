@@ -1,8 +1,8 @@
 const sendForm = document.getElementById('SendForm');
 
 sendForm.addEventListener('submit', function (e) 
-{ /* !!! ЭТА ФУН. ОБРАБ. СОБЫТИЕ SUBMIT*/
-    e.preventDefault(); /*//!!! ОЧЕНЬ ВАЖНАЯ ИНСТРУКЦИЯ - "НЕ ПЕРЕЗАГРУЖАЙ СТРАНИЦУ!"*/
+{ 
+    e.preventDefault(); 
     
     let userName = document.getElementById("user_name_input");
 
@@ -12,7 +12,7 @@ sendForm.addEventListener('submit', function (e)
         exit;
     }
 
-    const formData = new FormData(sendForm); /*formData - объект хранящий данные формы*/
+    const formData = new FormData(sendForm);
 
     let user_name_input_let = document.getElementById('user_name_input').value;
 

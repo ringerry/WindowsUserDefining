@@ -13,10 +13,21 @@
     <script>
         setInterval(() => {
             window.location.reload();
-        }, 1000);
+        }, 5000);
     </script>
 
     <style>
+
+        #blink2 {
+        -webkit-animation: blink2 1s linear infinite;
+        animation: blink2 1s linear infinite;
+        }
+        @-webkit-keyframes blink2 {
+        100% { color: rgba(34, 34, 34, 0); }
+        }
+        @keyframes blink2 {
+        100% { color: rgba(34, 34, 34, 0); }
+        }
 
     </style>
 </head>
@@ -36,7 +47,7 @@
         <!--Главная область-->
         <div class="main_div">
             <!-- todo: Сделать мигание -->
-            <h1>Загрузка приложения...</h1>
+            <h1 id="blink2">Загрузка приложения...</h1>
         </div>
     </main>
     <!-- <footer>

@@ -1,19 +1,125 @@
 
 // set up plain express server
+const http = require('http');
+const fs = require('fs');
 const app = require('express')();
+const path  = require('path');
+
+let IsMainServerWork = false;
 
 // set up route to redirect all routes to port 3000
 // note this only works for GET requests, things like POST from your code or forms 
 //   must specify the proper port 3000
-// app.get('*', function(req, res) {  
-//     res.redirect('http:3000//' + req.headers.host + req.url);
-// });
+let flag = true;
+app.get('*', function(req, res) {  
+
+    // fs.readFile('./static/index_preloader.html', null, function(err, data)
+    // {
+    // if (err)
+    // {
+    //     res.writeHead(404);
+    //     res.write('Файл не найден.');
+    //     res.end();
+    // }
+        CheckIsMainServerWork();
+
+        console.log( `ГЛАВНАЯ IsMainServerWork = ${IsMainServerWork}`);
+
+        if(IsMainServerWork)
+        {
+            console.log('Перенаправляемся.');
+            res.redirect('http://localhost:3333');
+        }
+
+        res.sendFile(path.join(__dirname, './static/index_preloader.html'));
+
+    // });
+    // if(flag)
+    // {
+    //     flag = false;
+    //     console.log('Перенаправляемся.');
+    //     res.redirect('http://localhost:3333');
+    // }
+    // res.send('Привет!');
+});
 
 // have it listen on 80
-// app.listen(3332);
+app.listen(3332);
 
-// const http = require('http');
-// const fs = require('fs');
+function CheckIsMainServerWork()
+{
+    //IsMainServerWork = false;
+
+    const options = {
+        hostname: 'localhost',
+        port: 3333,
+        path: '/',
+        method: 'GET',
+        headers: {
+        'Content-Type': 'text/html'
+        }
+    };
+
+    // const req = http.request(options, (res) => {
+
+    //     console.log(`STATUS: ${res.statusCode}`);
+    //     console.log(`HEADERS: ${JSON.stringify( res.headers)}`);
+    //     res.setEncoding('utf8');
+    //     let chunk_res;
+
+    //     res.on('data', (chunk) => {
+    //         chunk_res = chunk;
+    //         console.log(`BODY: ${chunk}`);
+    //     });
+
+    //     flag = true;
+
+    //     console.log( 'Внутри функции');
+
+    // });
+
+    const req = http.get('http://localhost:3333', (res) => {
+
+        if (res.statusCode == 200)
+        {
+            //IsMainServerWork = true;
+            SetIsMainServerWork(true);
+            console.log( `Ответ 200 IsMainServerWork = ${IsMainServerWork}`);
+        }
+        console.log(`STATUS: ${res.statusCode}`);
+        // console.log(`HEADERS: ${JSON.stringify( res.headers)}`);
+        // res.setEncoding('utf8');
+        // let chunk_res;
+
+        // res.on('data', (chunk) => {
+        //     chunk_res = chunk;
+        //     console.log(`BODY: ${chunk}`);
+        // });
+
+        // flag = true;
+
+        console.log( 'Внутри функции');
+
+    });
+
+    // console.log( req.eventNames());
+    console.log( 'Проверка порта.');
+
+    console.log( `Функция проверки IsMainServerWork = ${IsMainServerWork}`);
+    
+    req.on('error', (e) => {
+        console.error(`problem with request: ${e.message}`);
+        IsMainServerWork = false;
+    });
+
+    return IsMainServerWork;
+}
+
+function SetIsMainServerWork(bool)
+{
+    IsMainServerWork = bool;
+}
+
 
 // var net = require('net');
 
@@ -39,30 +145,27 @@ const app = require('express')();
 //     to.pipe(from);
 // }).listen(addr.from[3], addr.from[2]);
 
-const requestListener = function (req, res) {
-    res.writeHead(200,{'Content-Type':'text/html'});
-    fs.readFile('./static/index.html', null, function(err, data)
-    {
-    if (err)
-    {
-        res.writeHead(404);
-        res.write('Файл не найден.');
-        res.end();
-    }
-        if(IsMainServerWork())
-        {
-            res.redirect('http:3000//' + req.headers.host + req.url);
-        }
+// const requestListener = function (req, res) {
+//     res.writeHead(200,{'Content-Type':'text/html'});
+//     fs.readFile('./static/index.html', null, function(err, data)
+//     {
+//     if (err)
+//     {
+//         res.writeHead(404);
+//         res.write('Файл не найден.');
+//         res.end();
+//     }
+//         if(IsMainServerWork())
+//         {
+//             res.redirect('http:3000//' + req.headers.host + req.url);
+//         }
 
-        res.write(data);
-        res.end();
-    });
-}
+//         res.write(data);
+//         res.end();
+//     });
+// }
 
-function IsMainServerWork()
-{
-    return true;
-}
+
 
 // const server = http.createServer(requestListener);
 // server.listen(3332);

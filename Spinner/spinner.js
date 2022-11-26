@@ -1,25 +1,35 @@
-
-// set up plain express server
 const http = require('http');
 const fs = require('fs');
-const app = require('express')();
-const path  = require('path');
 
 let IsMainServerWork = false;
 
-app.get('*', function(req, res) {  
+http
+.createServer((req,res)=>{
 
     CheckIsMainServerWork();
-
+    
     if(IsMainServerWork)
     {
-        res.redirect('http://localhost:3333');
+        res.writeHead(302,{'Location':'http://localhost:3333'});
+        res.end('');
     }
 
-    res.sendFile(path.join(__dirname, './index_preloader.html'));
-});
+    fs.readFile('./index_preloader.html', null, function(err, data)
+    {
+        if (err)
+        {
+            res.writeHead(404);
+            res.write('Файл не найден.');
+            res.end();
+        }
 
-let server = app.listen(3332);
+        res.writeHead(200,{'Content-Type':'text/html'});
+        res.write(data);
+        res.end();
+    });
+
+})
+.listen(3332);
 
 
 function CheckIsMainServerWork()
@@ -34,7 +44,7 @@ function CheckIsMainServerWork()
     });
 
     req.on('error', (e) => {
-        console.error(`Ошибки в запросе: ${e.message}`);
+        console.error(`Ошибки в ответе или запросе: ${e.message}`);
         IsMainServerWork = false;
     });
 

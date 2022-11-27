@@ -19,9 +19,7 @@ app.post("/", jsonParser, function (request, response) {
         return response.sendStatus(400);
     } 
 
-    console.log('start body');
     console.log(request.body);
-    console.log('end body');
 
     let resp = 
     {
@@ -31,8 +29,8 @@ app.post("/", jsonParser, function (request, response) {
     response.send(resp);
 });
 
-let port = process.env.PORT || 80;
+let port = process.argv[2] || 3333;
 
 app.listen(port, function() {
-    console.log("Listening on " + port);
+    console.log("Порт прослушивания: " + port);
 });

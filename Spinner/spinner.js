@@ -10,7 +10,7 @@ http
     
     if(IsMainServerWork)
     {
-        res.writeHead(302,{'Location':'http://localhost:3333'});
+        res.writeHead(302,{'Location':GetRedirectAdress()});
         res.end('');
     }
 
@@ -29,12 +29,15 @@ http
     });
 
 })
-.listen(3332);
+.listen(GetCurrentPort());
 
+// process.argv.forEach(function (val, index, array) {
+//     console.log(index + ': ' + val);
+// });
 
 function CheckIsMainServerWork()
 {
-    const req = http.get('http://localhost:3333', (res) => {
+    const req = http.get(GetRedirectAdress(), (res) => {
 
         if (res.statusCode == 200)
         {
@@ -49,4 +52,24 @@ function CheckIsMainServerWork()
     });
 
     return IsMainServerWork;
+}
+
+function GetRedirectAdress()
+{
+    if(process.argv.length<3)
+    {
+        return 'http://localhost:3333';
+    }
+
+    return 'http://localhost' + ':' + process.argv[3];
+}
+
+function GetCurrentPort()
+{
+    if(process.argv.length<3)
+    {
+        return '3332';
+    }
+
+    return process.argv[2];
 }

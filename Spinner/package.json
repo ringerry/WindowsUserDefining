@@ -5,7 +5,7 @@
   "main": "spinner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node spinner.js"
+    "start": "node spinner.js %CWU_PORT_PRELOADER% %CWU_PORT%"
   },
   "dependencies": {
     "express": "^4.18.2"

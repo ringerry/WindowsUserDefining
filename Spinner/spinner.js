@@ -3,6 +3,23 @@ const fs = require('fs');
 
 let IsMainServerWork = false;
 
+
+// http.get(GetCurrentAddress()+'/favicon.svg',res =>{
+//     fs.readFile('./favicon.svg', null, function(err, data)
+//     {
+//         if (err)
+//         {
+//             res.writeHead(404);
+//             res.write('Файл не найден.');
+//             res.end();
+//         }
+
+//         res.writeHead(200,{'Content-Type':'image/svg'});
+//         res.write(data);
+//         res.end();
+//     });
+// });
+
 http
 .createServer((req,res)=>{
 
@@ -10,7 +27,7 @@ http
     
     if(IsMainServerWork)
     {
-        res.writeHead(302,{'Location':GetRedirectAdress()});
+        res.writeHead(302,{'Location':GetRedirectAddress()});
         res.end('');
     }
 
@@ -28,12 +45,37 @@ http
         res.end();
     });
 
+    // if (q.url === '/favicon.ico') {
+    //     r.writeHead(200, {'Content-Type': 'image/x-icon'} );
+    //     r.end();
+    //     console.log('favicon requested');
+    //     return;
+    //   }
+
+    if(req.url=='/favicon.png')
+    {
+        fs.readFile('./favicon.png', null, function(err, data)
+        {
+            if (err)
+            {
+                res.writeHead(404);
+                res.write('Файл не найден.');
+                res.end();
+            }
+    
+            res.writeHead(200,{'Content-Type':'image/png'});
+            res.write(data);
+            res.end();
+        });
+    }
+
 })
 .listen(GetCurrentPort());
 
+
 function CheckIsMainServerWork()
 {
-    const req = http.get(GetRedirectAdress(), (res) => {
+    const req = http.get(GetRedirectAddress(), (res) => {
 
         if (res.statusCode == 200)
         {
@@ -50,7 +92,7 @@ function CheckIsMainServerWork()
     return IsMainServerWork;
 }
 
-function GetRedirectAdress()
+function GetRedirectAddress()
 {
     if(process.argv.length<3)
     {
@@ -68,4 +110,9 @@ function GetCurrentPort()
     }
 
     return process.argv[2];
+}
+
+function GetCurrentAddress()
+{
+    return 'http://localhost:'+GetCurrentPort();
 }

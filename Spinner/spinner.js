@@ -3,23 +3,6 @@ const fs = require('fs');
 
 let IsMainServerWork = false;
 
-
-// http.get(GetCurrentAddress()+'/favicon.svg',res =>{
-//     fs.readFile('./favicon.svg', null, function(err, data)
-//     {
-//         if (err)
-//         {
-//             res.writeHead(404);
-//             res.write('Файл не найден.');
-//             res.end();
-//         }
-
-//         res.writeHead(200,{'Content-Type':'image/svg'});
-//         res.write(data);
-//         res.end();
-//     });
-// });
-
 http
 .createServer((req,res)=>{
 
@@ -44,13 +27,6 @@ http
         res.write(data);
         res.end();
     });
-
-    // if (q.url === '/favicon.ico') {
-    //     r.writeHead(200, {'Content-Type': 'image/x-icon'} );
-    //     r.end();
-    //     console.log('favicon requested');
-    //     return;
-    //   }
 
     if(req.url=='/favicon.png')
     {
@@ -80,7 +56,6 @@ function CheckIsMainServerWork()
         if (res.statusCode == 200)
         {
             IsMainServerWork = true;
-            console.log( `Ответ 200 IsMainServerWork = ${IsMainServerWork}`);
         }
     });
 

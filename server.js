@@ -1,6 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
-
 const check_windows_user = require('bindings')('check_windows_user');
 
 let express = require('express');
@@ -28,6 +25,7 @@ app.post("/", jsonParser, function (request, response) {
 
     response.send(resp);
 });
+
 
 let port = process.argv[2] || 3333;
 

@@ -31,10 +31,6 @@ http
 })
 .listen(GetCurrentPort());
 
-// process.argv.forEach(function (val, index, array) {
-//     console.log(index + ': ' + val);
-// });
-
 function CheckIsMainServerWork()
 {
     const req = http.get(GetRedirectAdress(), (res) => {
